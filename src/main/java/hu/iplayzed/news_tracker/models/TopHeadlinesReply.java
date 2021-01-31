@@ -3,10 +3,7 @@ package hu.iplayzed.news_tracker.models;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
@@ -14,24 +11,28 @@ import java.util.UUID;
 @Entity
 @Table
 @Configurable
-public class TopHeadlines {
+public class TopHeadlinesReply {
     @Id
+    @Column(unique = true)
     private UUID requestUUID;
     @NotNull
+    @Column
     private String statusCode;
     @NotNull
+    @Column
     private int totalResults;
     @ElementCollection
+    @Column
     private Set<Article> articles = new TreeSet<>();
 
-    public TopHeadlines(UUID requestUUID, String statusCode, int totalResults, Set<Article> articles) {
+    public TopHeadlinesReply(UUID requestUUID, String statusCode, int totalResults, Set<Article> articles) {
         this.requestUUID = requestUUID;
         this.statusCode = statusCode;
         this.totalResults = totalResults;
         this.articles = articles;
     }
 
-    public TopHeadlines() {
+    public TopHeadlinesReply() {
 
     }
 
